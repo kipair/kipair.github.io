@@ -1,0 +1,183 @@
+<html>
+<head>
+  <title>journal 01 - guix analysis</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body class="text">
+  <pre>
+                                                                ██ ▄█▀ ██▓███
+                                                                ██▄█▒ ▓██░  ██▒
+                                                              ▓███▄░ ▓██░ ██▓▒
+                                                               ▓██ █▄ ▒██▄█▓▒ ▒
+                                                               ▒██▒ █▄▒██▒ ░  ░
+                                                               ▒ ▒▒ ▓▒▒▓▒░ ░  ░
+                                                               ░ ░▒ ▒░░▒ ░
+                                                               ░ ░░ ░ ░░
+                                                               ░  ░
+
+<a class="back-link" href="../../index.html">Home</a>
+
+ ╓                                 ╖
+═╣ Journal Entry 01: Guix Analysis ╠═══════════════════════════════════════════
+ ╙                                 ╜
+
+Beyond its fully libre philosophy, what stands out about GNU Guix is how the
+system behaves in practice after spending most of your time on systems where
+you change things directly as you go.
+
+GNU Guix is a declarative operating system, where packages, services, and
+system configurations are stored in a reproducible configuration file.
+Everything is is specified explicitly, rather than through ad-hoc changes to
+a system. This approach is in contrast to the common practice on nearly all
+*NIX distributions, where software is installed directly from the command line.
+
+In other words, Guix is an operating system which lets you define your computer
+setup in a single file so it can be recreated exactly the same way anytime,
+instead of changing things manually step by step.
+
+ ╓                  ╖
+═╣ Libre Philosophy ╠══════════════════════════════════════════════════════════
+ ╙                  ╜
+
+If you are well acquainted with Linux and its derivatives, you may know about
+NixOS. NixOS achieves the same fundamental goal as GNU Guix: a reproducible,
+declarative operating system. What makes Guix special is its design philosophy.
+
+Guix adheres to the Free Software Foundation's (FSF) principles of "free
+software". Richard Stallman, the founder of the FSF, defines "free software"
+(FOSS, libre) not in terms of price, but in terms of <i>freedom</i>. Free
+software is software which respects users' freedom to run, study, modify, and
+redistribute it.
+
+The reason why this is significant is because Guix does not treat free software
+as an abstract philosophy, but rather as an enforced set of rules baked into
+the operating system. Guix is designed so that every layer of its system is
+adhering to a strict set of rules of what can and cannot run.
+
+This means, in practice, Guix will not bend over backward or cut corners when
+dealing with proprietary packages and dependencies. If a piece of hardware
+on your laptop -- for example, a WiFi card -- requires a proprietary driver,
+it may not function at all, unless a free alternative exists.
+
+A useful comparison can be made with a common Linux distribution like Mint,
+where users are typically offered the open-source Noveau driver by default, but
+also given the option to install the proprietary NVIDIA driver from a separate
+repository for improved performance. In Guix, this choice is not presented, as
+proprietary components are excluded from the default system.
+
+With this in mind, anyone considering using Guix on bare metal should carefully
+check hardware compatibility beforehand, since its commitment to software
+freedom can cause severe limitations on out-of-the-box hardware functionality.
+
+Richard Stallman perfectly encapsulates what free software is, and why it is
+important <a class="text-link" href="https://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ_with_notes.webm" target="_blank">here</a>.
+
+ ╓                           ╖
+═╣ Declarative Configuration ╠═════════════════════════════════════════════════
+ ╙                           ╜
+
+In Guix, the entire operating system is defined in a single configuration file
+written in Scheme. Scheme is a dialect of the Lisp programming language, which
+puts an emphasis on simplicity and minimalist design, which harmonizes with
+the free/libre approach Guix attains to.
+
+The Guix installer will generate a default configuration file and places it
+under /etc/config.scm:
+
+┌─┤ /etc/config.scm ├─────────────────────────────────────────────────────────┐
+│                                                                             │
+│  (use-modules (gnu))                                                        │
+│  (use-package-modules …)                                                    │
+│  (use-service-modules …)                                                    │
+│                                                                             │
+│  (operating-system                                                          │
+│      (host-name …)                                                          │
+│      (timezone …)                                                           │
+│      (locale …)                                                             │
+│      (bootloader …)                                                         │
+│      (file-systems …)                                                       │
+│      (users …)                                                              │
+│      (packages …)                                                           │
+│      (services …))                                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+User accounts, services, packages -- the entire configuration of the operating
+system -- are declared in this single file. The <a class="text-link" href="https://guix.gnu.org/manual/devel/en/">GNU Guix Reference Manual</a>
+suggests keeping the configuration file under version control in case of any
+accidents.
+
+An example of installing a handful of packages is extremely simple, as follows:
+
+┌─┤ /etc/config.scm ├─────────────────────────────────────────────────────────┐
+│                                                                             │
+│  (use-modules (gnu))                                                        │
+│                                                                             │
+│  (operating-system                                                          │
+│      ...                                                                    │
+│                                                                             │
+│      (packages(append(list                                                  │
+│                       dwm st dmenu fastfetch                                │
+│                       htop cmatrix vim)))                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Once you have finished editing your configuration the most important part is to
+<i>instantiate</i> it -- apply the changes to your system:
+
+┌─┤ terminal ├────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│  sudo guix system reconfigure /etc/config.scm                               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+An interesting thing about Guix is that changes to the system are not exactly
+overwritten. Instead, it keeps a log of all changes, which can be easily
+accessed. If you wanted to revert back to any previous version of your system,
+you can roll back your system with a single command. You can see how this be
+incredibly beneficial in the event you somehow installed a malicious package,
+or entered an incorrect fstab entry.
+
+ ╓                        ╖
+═╣ Ephemeral Environments ╠════════════════════════════════════════════════════
+ ╙                        ╜
+
+More often than not, you may need to use a tool only once, without wanting to
+clutter the system with unnecessary packages and their dependencies. This
+becomes even more frustrating when every temporary tool requires modifying the
+configuration file just to append another entry to the package list.
+
+This is where Guix's ephemeral shell environments becomes exponentially more
+useful. Instead of permanently adding a package to the system, Guix can
+construct a temporary environment, where packages exist only for the lifetime
+of the shell session, disappearing once the session is terminated.
+
+An example of installing packages in a one-off environment is as follows:
+
+┌─┤ terminal ├────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│  guix shell exiftool fastfetch feh                                          │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+ ╓                ╖
+═╣ Final Thoughts ╠════════════════════════════════════════════════════════════
+ ╙                ╜
+
+GNU Guix is a niche -- yet very cool -- operating system which solves a major pain
+point of the lack of reproducibility in most modern operating systems. Albeit,
+the fully free approach can come off as hardcore, and not pracical for every
+day use.
+
+Because Guix is so utterly commited to free software, its repository therefore
+limited in comparison to popular ones, such as the AUR for Arch Linux.
+
+Just like the name, Guix appeals to Geeks who just want to experiment with
+different operating systems or embody the libre philosophy in its most pure
+form.
+  </pre>
+</body>
+</html>
+
