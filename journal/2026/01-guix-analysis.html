@@ -120,7 +120,8 @@ An example of installing a handful of packages is extremely simple, as follows:
 │                                                                             │
 │      (packages(append(list                                                  │
 │                       dwm st dmenu fastfetch                                │
-│                       htop cmatrix vim)))                                   │
+│                       htop cmatrix vim)                                     │
+│                       %base-packages))                                      │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 
@@ -136,29 +137,30 @@ Once you have finished editing your configuration the most important part is to
 An interesting thing about Guix is that changes to the system are not exactly
 overwritten. Instead, it keeps a log of all changes, which can be easily
 accessed. If you wanted to revert back to any previous version of your system,
-you can roll back your system with a single command. You can see how this be
-incredibly beneficial in the event you somehow installed a malicious package,
-or entered an incorrect fstab entry.
+you can easily do so with a single command. This feature is incredibly
+beneficial in the event you somehow installed a malicious package, entered an
+incorrect fstab entry, or otherwise broke your installation.
 
  ╓                        ╖
 ═╣ Ephemeral Environments ╠════════════════════════════════════════════════════
  ╙                        ╜
 
-More often than not, you may need to use a tool only once, without wanting to
-clutter the system with unnecessary packages and their dependencies. This
-becomes even more frustrating when every temporary tool requires modifying the
-configuration file just to append another entry to the package list.
+More often than not, you may find yourself in a situation where you need to use
+a tool only once, without wanting to clutter the system with unnecessary
+packages and their dependencies. This situation becomes even more frustrating
+when every temporary tool requires modifying the configuration file just to
+append another entry to the package list.
 
-This is where Guix's ephemeral shell environments becomes exponentially more
-useful. Instead of permanently adding a package to the system, Guix can
-construct a temporary environment, where packages exist only for the lifetime
-of the shell session, disappearing once the session is terminated.
+This is where Guix's ephemeral shell environments becomes useful. Instead of
+permanently adding a package to the system, Guix can construct a temporary
+environment, where packages you install only exist for the lifetime of the
+shell session, disappearing once the session is terminated.
 
-An example of installing packages in a one-off environment is as follows:
+An example of installing a package in a one-off environment is as follows:
 
 ┌─┤ terminal ├────────────────────────────────────────────────────────────────┐
 │                                                                             │
-│  guix shell exiftool fastfetch feh                                          │
+│  guix shell fastfetch                                                       │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 
@@ -166,13 +168,15 @@ An example of installing packages in a one-off environment is as follows:
 ═╣ Final Thoughts ╠════════════════════════════════════════════════════════════
  ╙                ╜
 
-GNU Guix is a niche -- yet very cool -- operating system which solves a major pain
-point of the lack of reproducibility in most modern operating systems. Albeit,
-the fully free approach can come off as hardcore, and not pracical for every
-day use.
+GNU Guix is a niche -- yet very cool -- operating system which solves a common
+pain point, which is the lack of reproducibility in modern operating systems.
+Albeit, the fully libre approach can come off as hardcore to most people, and
+is not practical for every day use, especialy if one needs to use particular
+software.
 
-Because Guix is so utterly commited to free software, its repository therefore
-limited in comparison to popular ones, such as the AUR for Arch Linux.
+Because Guix is so utterly commited to free software, its package repository is
+therefore limited in comparison to popular alternatives, such as the AUR for
+Arch Linux.
 
 Just like the name, Guix appeals to Geeks who just want to experiment with
 different operating systems or embody the libre philosophy in its most pure
