@@ -1,0 +1,106 @@
+/* Theming and design heavily inspired from https://tmp0ut.sh/ */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #050505;
+    color: #F0F0F0;
+    font-family: "unifont", "Lucida Console", monospace, Monaco;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.container {
+    width: 80ch;
+    margin: 0 auto;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+.centered-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+p {
+    margin: 0 0 16px 0;
+    text-align: left;
+}
+
+pre {
+    font-family: inherit;
+    margin: 0 0 16px 0;
+    white-space: pre;
+}
+
+a {
+    color: #B8B8B8;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F0F0F0;
+}
+
+.text-link {
+    color: #8181AA;
+    text-decoration: underline;
+}
+
+@font-face {
+    font-family: "unifont";
+    src: url("../fonts/unifont.woff2") format("woff");
+}
+
+/* nuke the highlight.js background box and styling entirely */
+pre code.hljs {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding-left: 2ch !important; 
+    padding-right: 2ch !important;
+    font-family: "unifont", "Lucida Console", monospace, Monaco !important;
+    font-size: 16px !important;
+}
+
+/* TERMINAL BOXES */
+
+.vx-box {
+    border: 1px solid #F0F0F0;
+    padding: 2.8ch 0.6ch;
+    margin: 25px 0 16px 0;
+    position: relative;
+    border-radius: 0;
+}
+
+.vx-label {
+    position: absolute;
+    top: -9px;
+    left: 1ch;
+    background: #050505;
+    padding: 0 1ch;
+    color: #F0F0F0;
+    font-size: 14px;
+}
+
+/* removes default bottom margin inside the box and enables scrolling for long lines */
+.vx-box pre {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.cert-row {
+    display: flex;
+    align-items: center; /* Guarantees mathematical vertical centering */
+    gap: 1.5ch;          /* Fixed horizontal space between image and text */
+    margin-bottom: 16px; /* Exact uniform gap between certification rows */
+}
+
+.cert-row img {
+    height: 3em;       /* Standardized logo height */
+    width: auto;         /* Preserves aspect ratio without stretching */
+    flex-shrink: 0;      /* Prevents image from shrinking on small screens */
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+
+  <title>kipair's journal</title>
+  <link>https://kipair.github.io/</link>
+  <description>writeups and reports</description>
+  <language>en-us</language>
+
+  <item>
+    <title>Guix Analysis</title>
+    <link>https://kipair.github.io/journal/2026/01-guix-analysis.html</link>
+    <description>a look into the Guix operating system</description>
+    <pubDate>Sat, 23 May 2026 12:00:00 GMT</pubDate>
+  </item>
+
+</channel>
+</rss>
