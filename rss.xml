@@ -7,12 +7,13 @@
   <description>Writeups and Reports</description>
   <language>en-us</language>
 
-    <item>
+  <item>
     <title>Deobfuscating C2 Beacon Jitter</title>
     <link>https://kipair.github.io/blog/2026/02-deobfuscating-c2-beacon-jitter.html</link>
     <description>A deep dive into how C2 jitter works, and its limitations.</description>
     <pubDate>Sat, 12 September 2026 12:00:00 GMT</pubDate>
-
+  </item>
+  
   <item>
     <title>Guix Analysis</title>
     <link>https://kipair.github.io/blog/2026/01-guix-analysis.html</link>
