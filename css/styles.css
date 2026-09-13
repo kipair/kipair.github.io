@@ -24,6 +24,13 @@ body {
     padding: 0;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px 0;
+}
+
 p {
     margin: 0 0 16px 0;
     text-align: left;
@@ -103,4 +110,28 @@ pre code.hljs {
     height: 3em;       /* Standardized logo height */
     width: auto;         /* Preserves aspect ratio without stretching */
     flex-shrink: 0;      /* Prevents image from shrinking on small screens */
+}
+
+/* IMAGES */
+.expandable {
+    cursor: zoom-in;
+}
+
+dialog {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+dialog::backdrop {
+    background: rgba(5, 5, 5, 0.9);
+}
+
+dialog img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border: 1px solid #F0F0F0;
+    cursor: zoom-out;
 }

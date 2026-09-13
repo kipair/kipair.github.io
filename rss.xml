@@ -2,15 +2,21 @@
 <rss version="2.0">
 <channel>
 
-  <title>kipair's journal</title>
+  <title>Kipair's Blog</title>
   <link>https://kipair.github.io/</link>
-  <description>writeups and reports</description>
+  <description>Writeups and Reports</description>
   <language>en-us</language>
+
+    <item>
+    <title>Deobfuscating C2 Beacon Jitter</title>
+    <link>https://kipair.github.io/blog/2026/02-deobfuscating-c2-beacon-jitter.html</link>
+    <description>A deep dive into how C2 jitter works, and its limitations.</description>
+    <pubDate>Sat, 12 September 2026 12:00:00 GMT</pubDate>
 
   <item>
     <title>Guix Analysis</title>
-    <link>https://kipair.github.io/journal/2026/01-guix-analysis.html</link>
-    <description>a look into the Guix operating system</description>
+    <link>https://kipair.github.io/blog/2026/01-guix-analysis.html</link>
+    <description>A look into the Guix operating system.</description>
     <pubDate>Sat, 23 May 2026 12:00:00 GMT</pubDate>
   </item>
 
