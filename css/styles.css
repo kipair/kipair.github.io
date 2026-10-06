@@ -10,6 +10,11 @@ body {
     line-height: 1;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 .container {
     width: 80ch;
     margin: 0 auto;
