@@ -26,10 +26,11 @@
  ╙                              ╜
 </pre>
 
-  <p>Beyond its fully libre philosophy, what stands out about GNU Guix is how the system behaves in practice after spending most of your time on systems where you change things directly as you go.</p>
+  <p>Beyond its fully libre philosophy, what stands out about GNU Guix is how the operating system behaves in practice after spending most of your time on systems where you change things directly as you go.</p>
 
-  <p>GNU Guix is a declarative operating system, where packages, services, and system configurations are stored in a reproducible configuration file. Everything is is specified explicitly, rather than through ad-hoc changes to a system. This approach is in contrast to the common practice on nearly all *NIX distributions, where software is installed directly from the command line.</p>
-    <p>In other words, Guix is an operating system which lets you define your computer setup in a single file so it can be recreated exactly the same way anytime, instead of changing things manually step by step.</p>
+  <p>GNU Guix is a declarative operating system, where packages, services, and system configurations are stored in a reproducible configuration file. Everything is is specified explicitly, rather than through ad-hoc changes to a system. This approach is in contrast to the common practice on nearly all unix-like distributions, where software is installed directly from the command line.</p>
+  
+  <p>In other words, Guix is an operating system which lets you define your computer setup in a single file so it can be recreated exactly the same way anytime, instead of changing things manually step by step.</p>
 
 <pre>
  ╓                  ╖
@@ -43,11 +44,13 @@
 
   <p>The reason why this is significant is because Guix does not treat free software as an abstract philosophy, but rather as an enforced set of rules baked into the operating system. Guix is designed so that every layer of its system is adhering to a strict set of rules of what can and cannot run.</p>
 
-  <p>This means, in practice, Guix will not bend over backward or cut corners when dealing with proprietary packages and dependencies. If a piece of hardware on your laptop -- for example, a WiFi card -- requires a proprietary driver, it may not function at all, unless a free alternative exists.</p>
+  <p>This means Guix will not cut corners when dealing with proprietary packages or dependencies. For example, a WiFi card on your laptop might require a proprietary driver in order to run. If you try using that card on Guix, it won't not function at all, unless there is a free alternative WiFi driver you can use instead.</p>
 
-  <p>A useful comparison can be made with a common Linux distribution like Mint, where users are typically offered the open-source Noveau driver by default, but also given the option to install the proprietary NVIDIA driver from a separate repository for improved performance. In Guix, this choice is not presented, as proprietary components are excluded from the default system.</p>
+  <p>A useful comparison can be made with a common Linux distribution, like Linux Mint. When you install Linux Mint, you are offered to install drivers for your computer's components. If you have an NVIDIA GPU, you are presented with the option of installing the free and open source "Noveau" driver, but you are also given the option to install the <i>proprietary</i> NVIDIA driver from a separate repository for improved performance. In Guix, this freedom of choice is ironically not presented at all, as proprietary components are completely excluded from the default system.</p>
 
-  <p>With this in mind, anyone considering using Guix on bare metal should carefully check hardware compatibility beforehand, since its commitment to software freedom can cause severe limitations on out-of-the-box hardware functionality. Richard Stallman perfectly encapsulates what free software is, and why it is important <a class="text-link" href="https://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ_with_notes.webm" target="_blank">here</a>.</p>
+  <p>With this in mind, anyone considering using Guix on bare metal should carefully check hardware compatibility beforehand, since Guix cause severe limitations on out-of-the-box functionality.</p>
+    
+  <p>Richard Stallman perfectly encapsulates what free software is, and why it is important <a class="text-link" href="https://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ_with_notes.webm" target="_blank">here</a>.</p>
 
 <pre>
  ╓                           ╖
@@ -55,7 +58,7 @@
  ╙                           ╜
 </pre>
 
-  <p>In Guix, the entire operating system is defined in a single configuration file written in Scheme. Scheme is a dialect of the Lisp programming language, which puts an emphasis on simplicity and minimalist design, which harmonizes with the free/libre approach Guix attains to.</p>
+  <p>In Guix, the entire operating system is defined in a single configuration file written in Scheme. Scheme is a dialect of the Lisp programming language, which puts an emphasis on simplicity and minimalism, which harmonizes with the free approach Guix is all about.</p>
 
   <p>The Guix installer will generate a default configuration file and places it under /etc/config.scm:</p>
 
@@ -76,7 +79,7 @@
     (services ...))</code></pre>
   </div>
 
-  <p>User accounts, services, packages -- the entire configuration of the operating system -- are declared in this single file. The <a class="text-link" href="https://guix.gnu.org/manual/devel/en/" target="_blank">GNU Guix Reference Manual</a> suggests keeping the configuration file under version control in case of any accidents.</p>
+  <p>User accounts, services, packages -- the entire configuration of the operating system -- is declared in this single file. The <a class="text-link" href="https://guix.gnu.org/manual/devel/en/" target="_blank">GNU Guix Reference Manual</a> suggests keeping the configuration file under version control in case of any accidents.</p>
 
   <p>An example of installing a handful of packages is extremely simple, as follows:</p>
 
@@ -93,7 +96,7 @@
                     %base-packages))</code></pre>
   </div>
 
-  <p>Once you have finished editing your configuration the most important part is to <i>instantiate</i> it -- apply the changes to your system:</p>
+  <p>Once you have finished editing your configuration the most important part is to <i>instantiate</i> it. In other words, apply the changes to your system:</p>
 
   <div class="vx-box">
     <span class="vx-label">terminal</span>
@@ -110,7 +113,7 @@
 
   <p>More often than not, you may find yourself in a situation where you need to use a tool only once, without wanting to clutter the system with unnecessary packages and their dependencies. This situation becomes even more frustrating when every temporary tool requires modifying the configuration file just to append another entry to the package list.</p>
 
-  <p>This is where Guix's ephemeral shell environments becomes useful. Instead of permanently adding a package to the system, Guix can construct a temporary environment, where packages you install only exist for the lifetime of the shell session, disappearing once the session is terminated.</p>
+  <p>This is where Guix's ephemeral shell environments becomes useful. Instead of permanently adding a package to the system, Guix can construct a temporary environment, where packages you install only exist for the lifetime of the shell session, disappearing once the session is terminated. The cherry on top is that you don't have to modify any configuation file to do this! It's as simple as installing a package in common Linux distributions.</p>
 
   <p>An example of installing a package in a one-off environment is as follows:</p>
 
@@ -125,11 +128,12 @@
  ╙                ╜
 </pre>
 
-  <p>GNU Guix is a niche -- yet very cool -- operating system which solves a common pain point, which is the lack of reproducibility in modern operating systems. Albeit, the fully libre approach can come off as hardcore to most people, and is not practical for every day use, especialy if one needs to use particular software.</p>
+  <p>GNU Guix is a niche and very interesting operating system which solves a common pain point: the lack of reproducibility in modern operating systems. Albeit, the fully libre approach can come off as hardcore to most people, and is not practical for every day use, especialy if one needs to use particular software.</p>
 
   <p>Because Guix is so utterly commited to free software, its package repository is therefore limited in comparison to popular alternatives, such as the AUR for Arch Linux.</p>
 
-  <p>Guix will definitely appeal to those who would like to experiment with the more uncommon Linux distributions and challenge their technical abilities. If you become a Guix user, you <i>become</i> the Libre philsophy.</p>
+  <p>Guix will definitely appeal to those who would like to experiment with the more uncommon Linux distributions and challenge their technical abilities. Additionally, if you become a full-time Guix user, you <i>will</i> radiate a profound level of technical superiority over other Linux users! (but nobody in real life actually gives a shit)</p>
+
 </body>
 </html>
 
